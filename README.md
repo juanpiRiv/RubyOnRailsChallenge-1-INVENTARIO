@@ -102,6 +102,34 @@ Si estás usando PowerShell en Windows, puedes seguir estos pasos para ejecutar 
 
 1.  Asegúrate de tener Docker Desktop instalado y en ejecución.
 
+## Volver a correr el proyecto
+
+Si necesitas volver a correr el proyecto, sigue estos pasos:
+
+1.  Abre PowerShell y navega hasta la carpeta del proyecto: `cd my-app`
+2.  Ejecuta los comandos de Docker Compose:
+    ```powershell
+    docker-compose build
+    docker-compose up
+    ```
+    Esto construirá la imagen de Docker e iniciará la aplicación.
+
+Ahora deberías poder acceder a la aplicación en `localhost:3000`.
+
+## Volver a correr el proyecto
+
+Si necesitas volver a correr el proyecto, sigue estos pasos:
+
+1.  Abre PowerShell y navega hasta la carpeta del proyecto: `cd my-app`
+2.  Ejecuta los comandos de Docker Compose:
+    ```powershell
+    docker-compose build
+    docker-compose up
+    ```
+    Esto construirá la imagen de Docker e iniciará la aplicación.
+
+Ahora deberías poder acceder a la aplicación en `localhost:3000`.
+
 2.  Abre PowerShell y navega hasta la carpeta del proyecto:
 
     ```powershell

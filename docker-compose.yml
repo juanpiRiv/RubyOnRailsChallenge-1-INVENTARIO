@@ -1,10 +1,30 @@
+version: '3.9'
 services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: inventario_development
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
   web:
-    build:
-      context: ./
-      dockerfile: Dockerfile
+    build: .
+    command: rails s -b 0.0.0.0
     ports:
       - "3000:3000"
     volumes:
       - .:/usr/src/app
-    command: rails s -b 0.0.0.0
+    depends_on:
+      - db
+    environment:
+      DATABASE_HOST: db
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: root
+      DATABASE_NAME: inventario_development
+
+volumes:
+  postgres_data:

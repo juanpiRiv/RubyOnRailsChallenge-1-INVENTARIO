@@ -9,7 +9,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data  # <- este volumen
 
   web:
     build: .
@@ -27,4 +27,4 @@ services:
       DATABASE_NAME: inventario_development
 
 volumes:
-  postgres_data:
+  postgres_data:  # <- asegurarte de que esté definido así

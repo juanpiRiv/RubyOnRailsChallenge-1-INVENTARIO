@@ -339,3 +339,133 @@ class CreateTransferencia < ActiveRecord::Migration[8.0]
     end
   end
 end
+
+## 🔧 Comandos y Tips Útiles
+
+### Rails
+
+*   Levantar servidor Rails:
+
+    ```bash
+    rails s
+    ```
+
+*   Crear un modelo con migración:
+
+    ```bash
+    rails g model NombreModelo atributo1:tipo atributo2:tipo
+    ```
+
+*   Ejecutar migraciones:
+
+    ```bash
+    rails db:migrate
+    ```
+
+*   Revertir la última migración:
+
+    ```bash
+    rails db:rollback
+    ```
+
+*   Resetear base de datos:
+
+    ```bash
+    rails db:drop db:create db:migrate
+    ```
+
+*   Abrir consola Rails:
+
+    ```bash
+    rails console
+    ```
+
+*   Abrir consola de base de datos:
+
+    ```bash
+    rails dbconsole
+    ```
+
+### Docker
+
+*   Construir imágenes y levantar contenedores:
+
+    ```bash
+    docker-compose up --build -d
+    ```
+
+*   Ver logs de contenedores:
+
+    ```bash
+    docker-compose logs -f
+    ```
+
+*   Acceder al contenedor de Rails:
+
+    ```bash
+    docker exec -it my-app-web-1 bash
+    ```
+
+*   Detener y eliminar contenedores:
+
+    ```bash
+    docker-compose down
+    ```
+
+*   Reconstruir contenedores después de cambios en Dockerfile:
+
+    ```bash
+    docker-compose build
+    docker-compose up -d
+    ```
+
+### PostgreSQL dentro de Docker
+
+*   Acceder a PostgreSQL desde el contenedor:
+
+    ```bash
+    docker exec -it my-app-db-1 psql -U postgres
+    ```
+
+*   Ver todas las bases de datos:
+
+    ```sql
+    \l
+    ```
+
+*   Cambiar de base de datos:
+
+    ```sql
+    \c nombre_base
+    ```
+
+*   Ver tablas:
+
+    ```sql
+    \dt
+    ```
+
+*   Ver estructura de una tabla:
+
+    ```sql
+    \d nombre_tabla
+    ```
+
+*   Ejecutar consultas SQL:
+
+    ```sql
+    SELECT * FROM nombre_tabla;
+    ```
+
+### Tips
+
+*   Siempre ejecutar migraciones dentro del contenedor si estás usando Docker.
+*   Para borrar todo y reconstruir el entorno:
+
+    ```bash
+    docker-compose down -v
+    docker-compose up --build -d
+    ```
+
+*   Mantén un volumen montado para que los cambios en Rails se reflejen en tu máquina host.
+*   Usa `rails db:seed` para poblar datos iniciales si lo configuraste.

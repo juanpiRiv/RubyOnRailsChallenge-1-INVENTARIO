@@ -175,7 +175,7 @@ Aquí está la lista de tareas que se ha seguido y las pendientes:
 ### Pasos para levantar el proyecto
 1.  **Clonar el repositorio:**
     ```bash
-    git clone https://juanpiRiv@github.com/juanpiRiv/Prog-II.git
+    git clone https://github.com/juanpiRiv/RubyOnRailsChallenge-1-INVENTARIO.git
     cd Prog-II/my-app
     ```
 
@@ -195,6 +195,7 @@ Aquí está la lista de tareas que se ha seguido y las pendientes:
     ```
     Una vez dentro del contenedor, ejecuta los siguientes comandos para crear la base de datos, ejecutar las migraciones y cargar los datos de ejemplo:
     ```bash
+    bundle install
     rails db:create
     rails db:migrate
     rails db:seed

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_04_220218) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_06_234428) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -41,7 +41,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_04_220218) do
     t.index ["persona_id"], name: "index_transferencia_on_persona_id"
   end
 
+  create_table "transferencias", force: :cascade do |t|
+    t.bigint "articulo_id", null: false
+    t.bigint "persona_id", null: false
+    t.date "fecha"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["articulo_id"], name: "index_transferencias_on_articulo_id"
+    t.index ["persona_id"], name: "index_transferencias_on_persona_id"
+  end
+
   add_foreign_key "articulos", "personas", column: "portador_id"
   add_foreign_key "transferencia", "articulos"
   add_foreign_key "transferencia", "personas"
+  add_foreign_key "transferencias", "articulos"
+  add_foreign_key "transferencias", "personas"
 end

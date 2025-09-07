@@ -1,0 +1,31 @@
+<%= form_with(model: transferencia, local: true) do |form| %>
+  <% if transferencia.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(transferencia.errors.count, "error") %> impidió guardar la transferencia:</h2>
+      <ul>
+        <% transferencia.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :articulo_id, "Artículo", style: "display: block" %>
+    <%= form.collection_select :articulo_id, Articulo.all, :id, ->(a){ "#{a.marca} #{a.modelo}" }, prompt: "Seleccione un artículo" %>
+  </div>
+
+  <div>
+    <%= form.label :persona_id, "Persona", style: "display: block" %>
+    <%= form.collection_select :persona_id, Persona.all, :id, :nombre, prompt: "Seleccione una persona" %>
+  </div>
+
+  <div>
+    <%= form.label :fecha, style: "display: block" %>
+    <%= form.date_field :fecha %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

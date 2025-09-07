@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  resources :transferencia
   resources :personas
   resources :articulos
-
+  resources :transferencias
   root "personas#index"
 end

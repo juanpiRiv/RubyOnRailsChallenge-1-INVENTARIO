@@ -1,0 +1,10 @@
+<h1>Transferencia</h1>
+
+<p>
+  Artículo: <%= @transferencia.articulo.marca %> <%= @transferencia.articulo.modelo %><br>
+  Persona: <%= @transferencia.persona.nombre %><br>
+  Fecha: <%= @transferencia.fecha %>
+</p>
+
+<%= link_to "Editar", edit_transferencia_path(@transferencia) %> |
+<%= link_to "Volver al listado", transferencias_path %>

@@ -1,0 +1,23 @@
+<div id="<%= dom_id transferencia %>">
+  <p>
+    <strong>Artículo:</strong>
+    <%= transferencia.articulo.marca %> <%= transferencia.articulo.modelo %>
+  </p>
+
+  <p>
+    <strong>Persona:</strong>
+    <%= transferencia.persona.nombre %>
+  </p>
+
+  <p>
+    <strong>Fecha:</strong>
+    <%= transferencia.fecha %>
+  </p>
+
+  <p>
+    <%= link_to "Mostrar", transferencia %> |
+    <%= link_to "Editar", edit_transferencia_path(transferencia) %> |
+    <%= button_to "Eliminar", transferencia, method: :delete, form: { data: { turbo_confirm: '¿Estás seguro?' } } %>
+  </p>
+  <hr>
+</div>

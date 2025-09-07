@@ -1,22 +1,40 @@
 <div id="<%= dom_id articulo %>">
   <p>
-    <strong>Modelo:</strong>
-    <%= articulo.modelo %>
-  </p>
-
-  <p>
     <strong>Marca:</strong>
     <%= articulo.marca %>
   </p>
 
   <p>
-    <strong>Fecha ingreso:</strong>
-    <%= articulo.fecha_ingreso %>
+    <strong>Modelo:</strong>
+    <%= articulo.modelo %>
   </p>
 
   <p>
-    <strong>Portador:</strong>
-    <%= articulo.portador_id %>
+    <strong>Fecha de Ingreso:</strong>
+    <%= articulo.fecha_ingreso %>
   </p>
 
+  <hr>
+
+  <h3>Portador Actual</h3>
+  <p>
+    <strong>Nombre:</strong>
+    <%= link_to "#{articulo.portador.nombre} #{articulo.portador.apellido}", persona_path(articulo.portador) %>
+  </p>
+
+  <hr>
+
+  <h3>Historial de Portadores (Transferencias)</h3>
+  <% if articulo.transferencias.any? %>
+    <ul>
+      <% articulo.transferencias.order(fecha: :desc).each do |transferencia| %>
+        <li>
+          <strong><%= transferencia.fecha %>:</strong>
+          Transferido a <%= link_to "#{transferencia.persona.nombre} #{transferencia.persona.apellido}", persona_path(transferencia.persona) %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No hay transferencias registradas para este artículo.</p>
+  <% end %>
 </div>

@@ -9,4 +9,34 @@
     <%= persona.apellido %>
   </p>
 
+  <hr>
+
+  <h3>Artículos Portados Actualmente</h3>
+  <% if persona.articulos.any? %>
+    <ul>
+      <% persona.articulos.each do |articulo| %>
+        <li>
+          <%= link_to "#{articulo.marca} #{articulo.modelo}", articulo_path(articulo) %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>Esta persona no tiene artículos asignados actualmente.</p>
+  <% end %>
+
+  <hr>
+
+  <h3>Historial de Artículos Portados (Transferencias)</h3>
+  <% if persona.transferencias.any? %>
+    <ul>
+      <% persona.transferencias.order(fecha: :desc).each do |transferencia| %>
+        <li>
+          <strong><%= transferencia.fecha %>:</strong>
+          Recibió el artículo <%= link_to "#{transferencia.articulo.marca} #{transferencia.articulo.modelo}", articulo_path(transferencia.articulo) %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No hay transferencias registradas para esta persona.</p>
+  <% end %>
 </div>

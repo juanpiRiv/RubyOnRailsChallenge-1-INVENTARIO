@@ -8,6 +8,7 @@ Persona.destroy_all
 puts "Creando personas..."
 persona1 = Persona.create!(nombre: "Juan", apellido: "Pérez")
 persona2 = Persona.create!(nombre: "Maria", apellido: "García")
+persona3 = Persona.create!(nombre: "Carlos", apellido: "Rodriguez")
 puts "#{Persona.count} personas creadas."
 
 # Crear Artículos
@@ -15,6 +16,8 @@ puts "Creando artículos..."
 articulo1 = Articulo.create!(marca: "Dell", modelo: "Laptop XPS 15", fecha_ingreso: Date.today - 30.days, portador: persona1)
 articulo2 = Articulo.create!(marca: "Apple", modelo: "Monitor Studio Display", fecha_ingreso: Date.today - 20.days, portador: persona1)
 articulo3 = Articulo.create!(marca: "Logitech", modelo: "Teclado MX Keys", fecha_ingreso: Date.today - 15.days, portador: persona2)
+articulo4 = Articulo.create!(marca: "Samsung", modelo: "SSD 1TB", fecha_ingreso: Date.today - 10.days, portador: persona3)
+articulo5 = Articulo.create!(marca: "Sony", modelo: "Auriculares WH-1000XM4", fecha_ingreso: Date.today - 5.days, portador: persona3)
 puts "#{Articulo.count} artículos creados."
 
 # Crear Transferencias

@@ -176,7 +176,7 @@ Aquí está la lista de tareas que se ha seguido y las pendientes:
 1.  **Clonar el repositorio:**
     ```bash
     git clone https://github.com/juanpiRiv/RubyOnRailsChallenge-1-INVENTARIO.git
-    cd Prog-II/my-app
+    cd my-app
     ```
 
 2.  **Construir las imágenes de Docker:**

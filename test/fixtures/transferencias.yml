@@ -2,10 +2,12 @@
 
 one:
   articulo: one
-  persona: one
-  fecha: 2025-09-06
+  portador_anterior: one
+  nuevo_portador: two
+  fecha: <%= Date.today - 10.days %>
 
 two:
   articulo: two
-  persona: two
-  fecha: 2025-09-06
+  portador_anterior: one
+  nuevo_portador: two
+  fecha: <%= Date.today - 5.days %>

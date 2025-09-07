@@ -5,8 +5,13 @@
   </p>
 
   <p>
-    <strong>Persona:</strong>
-    <%= transferencia.persona.nombre %>
+    <strong>Portador Anterior:</strong>
+    <%= link_to "#{transferencia.portador_anterior.nombre} #{transferencia.portador_anterior.apellido}", persona_path(transferencia.portador_anterior) %>
+  </p>
+
+  <p>
+    <strong>Nuevo Portador:</strong>
+    <%= link_to "#{transferencia.nuevo_portador.nombre} #{transferencia.nuevo_portador.apellido}", persona_path(transferencia.nuevo_portador) %>
   </p>
 
   <p>

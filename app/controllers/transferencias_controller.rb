@@ -22,9 +22,12 @@ class TransferenciasController < ApplicationController
   # POST /transferencias
   def create
     @transferencia = Transferencia.new(transferencia_params)
+    @articulo = Articulo.find(transferencia_params[:articulo_id])
+    @transferencia.portador_anterior_id = @articulo.portador_id
 
     if @transferencia.save
-      redirect_to transferencia_path(@transferencia), notice: "Transferencia creada correctamente."
+      @articulo.update(portador_id: @transferencia.nuevo_portador_id)
+      redirect_to @transferencia, notice: "Transferencia was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -52,6 +55,6 @@ class TransferenciasController < ApplicationController
   end
 
   def transferencia_params
-    params.require(:transferencia).permit(:articulo_id, :persona_id, :fecha)
+    params.require(:transferencia).permit(:articulo_id, :nuevo_portador_id, :fecha)
   end
 end

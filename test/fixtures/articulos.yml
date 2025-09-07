@@ -1,13 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  marca: MyString
-  modelo: MyString
-  fecha_ingreso: 2025-09-04
+  marca: Dell
+  modelo: Laptop XPS 15
+  fecha_ingreso: <%= Date.today - 30.days %>
   portador: one
 
 two:
-  marca: MyString
-  modelo: MyString
-  fecha_ingreso: 2025-09-04
+  marca: Apple
+  modelo: Monitor Studio Display
+  fecha_ingreso: <%= Date.today - 20.days %>
+  portador: one
+
+three:
+  marca: Logitech
+  modelo: Teclado MX Keys
+  fecha_ingreso: <%= Date.today - 15.days %>
   portador: two

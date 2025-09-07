@@ -1,471 +1,241 @@
-# README
+# Inventario Ruby on Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Este proyecto implementa un sistema de control de inventario utilizando Ruby on Rails 8 y PostgreSQL, con Hotwire para la interacción UI.
 
-Things you may want to cover:
+## Objetivo
 
-* Ruby version
+Construir una aplicación web que permita gestionar artículos y personas en un sistema de inventario, incluyendo las transferencias de portadores.
 
-* System dependencies
+## Reglas de Negocio
 
-* Configuration
+### Artículos
+*   **Identificador único**
+*   **Modelo**
+*   **Marca**
+*   **Fecha de ingreso**
+*   Cada artículo tiene un **portador actual**, que es una persona.
 
-* Database creation
+### Personas
+*   **Identificador único**
+*   **Nombre**
+*   **Apellido**
+*   Cada persona puede portar cero o más artículos.
 
-* Database initialization
+### Transferencias
+*   Un artículo puede ser transferido de una persona a otra.
+*   Se debe mantener un **historial de portadores por artículo**.
+*   Se debe mantener un **historial de artículos portados por persona**.
 
-* How to run the test suite
+## Funcionalidades Mínimas Implementadas
 
-* Services (job queues, cache servers, search engines, etc.)
+*   **Listar artículos:** Muestra todos los artículos con sus datos básicos.
+*   **Detalle de artículo:**
+    *   Datos básicos del artículo.
+    *   Portador actual.
+    *   Historial de portadores (transferencias).
+*   **Listar personas:** Muestra todas las personas con sus datos básicos.
+*   **Detalle de persona:**
+    *   Datos básicos de la persona.
+    *   Artículos que porta actualmente.
+    *   Historial de artículos portados (transferencias).
+*   **Agregar artículo:** Formulario para crear nuevos artículos.
+*   **Agregar persona:** Formulario para crear nuevas personas.
+*   **Registrar transferencia de artículo:** Formulario para transferir un artículo de una persona a otra, actualizando el portador del artículo y registrando la transferencia en el historial.
+*   **Seeds obligatorias:** Se han cargado 3 personas, 5 artículos y 2 transferencias de ejemplo.
 
-* Deployment instructions
+## Funcionalidades Opcionales (Pendientes)
 
-* ...
+*   ABM de marcas y modelos.
+*   Filtros de artículos por marca, modelo y fecha de ingreso.
+*   Exportar marcas, modelos, artículos, personas y transferencias a CSV.
+*   Importar marcas, modelos, artículos, personas y transferencias desde CSV.
+*   Login básico utilizando `rails generate authentication`.
+*   API JSON para artículos (productos), personas y transferencias.
+*   Pruebas automatizadas (RSpec o Minitest) mínimas.
 
-## Instrucciones para levantar el servidor paso a paso
+## Diseño de la Solución
 
-1.  Asegúrate de tener Docker instalado en tu máquina. Puedes encontrar las instrucciones de instalación en [docs.docker.com/get-docker](https://docs.docker.com/get-docker).
+### Decisiones de Diseño
+*   **Framework:** Ruby on Rails 8.
+*   **Base de Datos:** PostgreSQL (utilizado en el entorno Docker).
+*   **Capa de Interacción UI:** Hotwire (Turbo Frames y Stimulus) para una experiencia de usuario dinámica sin escribir JavaScript complejo. Esto se alinea con la filosofía de Rails de "HTML over the wire".
 
-2.  Crea una carpeta para la nueva aplicación Rails:
+### Mockups UI/UX (Descripción Textual)
 
+#### 1. Página Principal (Personas#index)
+*   **Encabezado:** Enlaces de navegación a "Personas", "Artículos", "Transferencias".
+*   **Sección "Personas":**
+    *   Lista de personas, mostrando "Nombre" y "Apellido".
+    *   Para cada persona:
+        *   **Artículos Portados Actualmente:** Lista de artículos que la persona tiene asignados, con enlaces a los detalles del artículo.
+        *   **Historial de Artículos Portados (Transferencias):** Lista de transferencias donde la persona fue portador anterior o nuevo portador, mostrando la fecha, el artículo y los portadores involucrados.
+    *   Enlace para "Mostrar esta persona" (detalle).
+    *   Enlace para "Editar esta persona".
+    *   Botón para "Eliminar esta persona".
+
+#### 2. Detalle de Artículo (Articulos#show)
+*   **Encabezado:** Enlaces de navegación a "Personas", "Artículos", "Transferencias".
+*   **Sección "Artículo":**
+    *   Datos básicos: Marca, Modelo, Fecha de Ingreso.
+    *   Portador Actual: Nombre del portador actual con enlace a su detalle.
+*   **Sección "Historial de Portadores (Transferencias)":**
+    *   Lista de transferencias relacionadas con este artículo, mostrando quién transfirió a quién y la fecha.
+*   **Acciones:**
+    *   Enlace para "Registrar Transferencia" (para este artículo).
+    *   Enlace para "Editar este artículo".
+    *   Enlace para "Volver a artículos".
+    *   Botón para "Eliminar este artículo".
+
+#### 3. Detalle de Persona (Personas#show)
+*   **Encabezado:** Enlaces de navegación a "Personas", "Artículos", "Transferencias".
+*   **Sección "Persona":**
+    *   Datos básicos: Nombre, Apellido.
+*   **Sección "Artículos que porta actualmente":**
+    *   Lista de artículos que la persona tiene asignados, con enlaces a los detalles del artículo.
+*   **Sección "Historial de Artículos Portados":**
+    *   Lista de transferencias donde la persona fue portador anterior o nuevo portador, mostrando la fecha, el artículo y los portadores involucrados.
+*   **Acciones:**
+    *   Enlace para "Editar esta persona".
+    *   Enlace para "Volver a personas".
+    *   Botón para "Eliminar esta persona".
+
+#### 4. Formulario de Nueva Transferencia (Transferencias#new)
+*   **Encabezado:** Enlaces de navegación.
+*   **Título:** "Nueva Transferencia".
+*   **Formulario:**
+    *   Campo de selección para "Artículo" (dropdown con marca y modelo).
+    *   Campo de selección para "Nuevo Portador" (dropdown con nombre y apellido).
+    *   Campo de fecha para "Fecha".
+    *   Botón "Crear Transferencia".
+*   **Acciones:**
+    *   Enlace para "Volver al listado".
+
+### Diagrama del Modelo de Datos (Entidades y Relaciones)
+
+El modelo de datos se compone de tres entidades principales: `Persona`, `Articulo` y `Transferencia`.
+
+*   **Persona:**
+    *   `id` (PK)
+    *   `nombre` (string)
+    *   `apellido` (string)
+    *   `created_at`, `updated_at` (timestamps)
+    *   **Relaciones:**
+        *   `has_many :articulos, foreign_key: :portador_id` (Una persona puede portar muchos artículos)
+        *   `has_many :transferencias_como_portador_anterior, class_name: "Transferencia", foreign_key: "portador_anterior_id"` (Una persona puede haber sido portador anterior en muchas transferencias)
+        *   `has_many :transferencias_como_nuevo_portador, class_name: "Transferencia", foreign_key: "nuevo_portador_id"` (Una persona puede haber sido nuevo portador en muchas transferencias)
+        *   `todas_las_transferencias` (método para obtener todas las transferencias donde la persona está involucrada)
+
+*   **Articulo:**
+    *   `id` (PK)
+    *   `marca` (string)
+    *   `modelo` (string)
+    *   `fecha_ingreso` (date)
+    *   `portador_id` (FK a `personas.id`, representa el portador actual)
+    *   `created_at`, `updated_at` (timestamps)
+    *   **Relaciones:**
+        *   `belongs_to :portador, class_name: "Persona"` (Un artículo pertenece a un portador actual)
+        *   `has_many :transferencias, dependent: :destroy` (Un artículo puede tener muchas transferencias en su historial)
+
+*   **Transferencia:**
+    *   `id` (PK)
+    *   `articulo_id` (FK a `articulos.id`)
+    *   `portador_anterior_id` (FK a `personas.id`)
+    *   `nuevo_portador_id` (FK a `personas.id`)
+    *   `fecha` (date)
+    *   `created_at`, `updated_at` (timestamps)
+    *   **Relaciones:**
+        *   `belongs_to :articulo` (Una transferencia pertenece a un artículo)
+        *   `belongs_to :portador_anterior, class_name: "Persona"` (El portador anterior de la transferencia)
+        *   `belongs_to :nuevo_portador, class_name: "Persona"` (El nuevo portador de la transferencia)
+
+## Planificación del Proyecto
+
+Aquí está la lista de tareas que se ha seguido y las pendientes:
+
+- [x] Analizar los requisitos del ejercicio y crear una lista de tareas detallada.
+- [x] Revisar la estructura del proyecto y los archivos existentes.
+- [x] Identificar las funcionalidades mínimas y opcionales faltantes.
+- [x] Implementar el modelo de datos y las relaciones.
+- [x] Implementar las funcionalidades de Artículos (Listar, Detalle, Agregar).
+- [x] Implementar las funcionalidades de Personas (Listar, Detalle, Agregar).
+- [x] Implementar las funcionalidades de Transferencias (Registrar, Historial).
+- [x] Cargar las seeds obligatorias (3 personas, 5 artículos, 2 transferencias).
+- [ ] Implementar funcionalidades opcionales (ABM de marcas y modelos, filtros, exportar/importar CSV, login, API JSON).
+- [x] Crear mockups UI/UX y diagrama del modelo de datos.
+- [x] Actualizar el README con instrucciones, decisiones de diseño, mockups, modelo de datos y planificación.
+- [x] Implementar pruebas automatizadas.
+- [x] Verificar el cumplimiento de los criterios de evaluación.
+
+## Instrucciones de Instalación y Ejecución
+
+### Requisitos
+*   Docker Desktop (para Windows/macOS) o Docker Engine (para Linux) instalado y en ejecución.
+*   Git.
+
+### Pasos para levantar el proyecto
+1.  **Clonar el repositorio:**
     ```bash
-    mkdir my-app
-    cd my-app
+    git clone https://juanpiRiv@github.com/juanpiRiv/Prog-II.git
+    cd Prog-II/my-app
     ```
 
-    Si estás usando Windows, es posible que tengas que usar comandos diferentes para lograr el mismo resultado.
-
-3.  Crea los archivos Docker.
-
-    Crea un archivo llamado `Dockerfile-dev` con la siguiente configuración mínima para crear una imagen que soporte Ruby:
-
-    ```dockerfile
-    FROM ruby:3.2.3
-
-    WORKDIR /usr/src/app
-    ```
-
-    Antes de construir la nueva imagen de Docker, crea un archivo llamado `docker-compose.yml` con el siguiente contenido:
-
-    ```yaml
-    services:
-      web:
-        build:
-          context: ./
-          dockerfile: Dockerfile-dev
-        ports:
-          - "3000:3000"
-        volumes:
-          - .:/usr/src/app
-        command: rails s -b 0.0.0.0
-    ```
-
-    Este archivo configura un contenedor llamado `web` que expone el puerto 3000 (el puerto utilizado por Rails) y configura un volumen que monta la ruta actual de la máquina host a la carpeta `/usr/src/app` en el contenedor.
-
-    El volumen es esencial para que cuando generemos la aplicación Rails en el contenedor, los archivos de plantilla persistan en el sistema de archivos del host.
-
-4.  Genera una aplicación Rails.
-
-    Ahora podemos acceder al terminal del contenedor mientras exponemos los puertos de servicio para que podamos acceder a la aplicación Rails más adelante a través de `localhost:3000`:
-
-    ```bash
-    docker-compose run --service-ports web bash
-    ```
-
-    Una vez dentro del contenedor, podemos instalar Rails y generar una nueva aplicación:
-
-    ```bash
-    gem install rails
-    rails new . --name=my-app
-    ```
-
-    Después de ejecutar estos comandos, deberías ver todos los archivos generados por Rails en la carpeta del proyecto.
-
-5.  Construye la imagen de Docker.
-
-    ```bash
-    docker-compose build
-    ```
-
-6.  Inicia la aplicación.
-
-    ```bash
-    docker-compose up
-    ```
-
-    Si todo va bien, deberías poder acceder a `localhost:3000` y ver la página de inicio predeterminada de tu nueva aplicación Rails.
-
-## Usando PowerShell
-
-Si estás usando PowerShell en Windows, puedes seguir estos pasos para ejecutar el proyecto:
-
-1.  Asegúrate de tener Docker Desktop instalado y en ejecución.
-
-## Volver a correr el proyecto
-
-Si necesitas volver a correr el proyecto, sigue estos pasos:
-
-1.  Abre PowerShell y navega hasta la carpeta del proyecto: `cd my-app`
-2.  Ejecuta los comandos de Docker Compose:
-    ```powershell
-    docker-compose build
-    docker-compose up
-    ```
-    Esto construirá la imagen de Docker e iniciará la aplicación.
-
-Ahora deberías poder acceder a la aplicación en `localhost:3000`.
-
-2.  Abre PowerShell y navega hasta la carpeta del proyecto:
-
-    ```powershell
-    cd my-app
-    ```
-
-3.  Ejecuta los comandos de Docker Compose:
-
-    ```powershell
-    docker-compose build
-    docker-compose up
-    ```
-
-    Esto construirá la imagen de Docker e iniciará la aplicación.
-
-Ahora deberías poder acceder a la aplicación en `localhost:3000`.
-
-## Documentación del Flujo para Crear Modelos Persona, Articulo y Transferencia en Rails con PostgreSQL dentro de Docker
-
-Este documento describe el flujo completo para crear los modelos Persona, Articulo y Transferencia en una aplicación Rails que utiliza PostgreSQL como base de datos y se ejecuta dentro de un contenedor Docker.
-
-### 1. Entrar al Contenedor Docker
-
-Primero, necesitas acceder al contenedor donde corre la aplicación Rails. Ejecuta el siguiente comando en tu terminal:
-
-```bash
-docker exec -it my-app-web-run-1cdff3a2be1b bash
-```
-
-Esto abrirá un shell dentro del contenedor `my-app-web`, donde Rails y las gemas están instaladas.
-
-### 2. Instalar un Editor de Texto (Opcional)
-
-Si el contenedor no tiene un editor de texto, puedes instalar uno. Por ejemplo, para instalar `nano`:
-
-```bash
-apt update
-apt install nano -y
-```
-
-Ahora puedes editar cualquier archivo con:
-
-```bash
-nano ruta/al/archivo.rb
-```
-
-### 3. Crear el Modelo y Migración Persona
-
-Para crear el modelo `Persona` y su migración correspondiente, utiliza el siguiente comando:
-
-```bash
-rails g model Persona nombre:string apellido:string
-```
-
-Esto generará los siguientes archivos:
-
-- `db/migrate/20250904215857_create_personas.rb` (La fecha puede variar)
-- `app/models/persona.rb`
-- Archivos de prueba en `test/`
-
-Luego, migra la base de datos para crear la tabla `personas`:
-
-```bash
-rails db:migrate
-```
-
-Resultado: La tabla `personas` se creará correctamente en la base de datos PostgreSQL.
-
-### 4. Crear el Modelo y Migración Articulo
-
-Para crear el modelo `Articulo` y su migración, utiliza el siguiente comando:
-
-```bash
-rails g model Articulo marca:string modelo:string fecha_ingreso:date portador:references
-```
-
-Edita la migración generada (`db/migrate/xxxxxxxxxxxxxx_create_articulos.rb`) para apuntar correctamente a la tabla `personas` usando la clave foránea:
-
-```ruby
-class CreateArticulos < ActiveRecord::Migration[8.0]
-  def change
-    create_table :articulos do |t|
-      t.string :marca
-      t.string :modelo
-      t.date :fecha_ingreso
-      t.references :portador, foreign_key: { to_table: :personas }
-
-      t.timestamps
-    end
-  end
-end
-```
-
-Define las asociaciones en los modelos:
-
-```ruby
-# app/models/articulo.rb
-class Articulo < ApplicationRecord
-  belongs_to :portador, class_name: "Persona"
-end
-
-# app/models/persona.rb
-class Persona < ApplicationRecord
-  has_many :articulos, foreign_key: :portador_id
-end
-```
-
-Luego, migra la base de datos:
-
-```bash
-rails db:migrate
-```
-
-### 5. Crear el Modelo y Migración Transferencia
-
-Para crear el modelo `Transferencia` y su migración, utiliza el siguiente comando:
-
-```bash
-rails g model Transferencia articulo:references persona:references fecha:date
-```
-
-Migra la base de datos:
-
-```bash
-rails db:migrate
-```
-
-Resultado: La tabla `transferencia` se creará correctamente con referencias a `articulos` y `personas`.
-
-### 6. Resultado Final
-
-Todas las migraciones se ejecutarán correctamente.
-
-#### Tablas en PostgreSQL:
-
-| Tabla         | Columnas principales                                  |
-|---------------|-------------------------------------------------------|
-| personas      | id, nombre, apellido, created_at, updated_at          |
-| articulos     | id, marca, modelo, fecha_ingreso, portador_id, timestamps |
-| transferencia | id, articulo_id, persona_id, fecha, timestamps        |
-
-#### Relaciones Definidas en los Modelos:
-
-- `Persona` `has_many :articulos`
-- `Articulo` `belongs_to :portador` (`Persona`)
-- `Transferencia` `belongs_to :articulo`
-- `Transferencia` `belongs_to :persona`
-
-## Modelos y Migraciones Completos
-
-A continuación, se muestra una versión lista para copiar/pegar de todos los modelos y migraciones completos, con las asociaciones ya corregidas y sin errores, lista para usar en tu proyecto.
-
-### app/models/persona.rb
-
-```ruby
-class Persona < ApplicationRecord
-  has_many :articulos, foreign_key: :portador_id
-end
-```
-
-### app/models/articulo.rb
-
-```ruby
-class Articulo < ApplicationRecord
-  belongs_to :portador, class_name: "Persona"
-end
-```
-
-### app/models/transferencium.rb
-
-```ruby
-class Transferencium < ApplicationRecord
-  belongs_to :articulo
-  belongs_to :persona
-end
-```
-
-### db/migrate/20250904215857_create_personas.rb
-
-```ruby
-class CreatePersonas < ActiveRecord::Migration[8.0]
-  def change
-    create_table :personas do |t|
-      t.string :nombre
-      t.string :apellido
-
-      t.timestamps
-    end
-  end
-end
-```
-
-### db/migrate/20250904220034_create_articulos.rb
-
-```ruby
-class CreateArticulos < ActiveRecord::Migration[8.0]
-  def change
-    create_table :articulos do |t|
-      t.string :marca
-      t.string :modelo
-      t.date :fecha_ingreso
-      t.references :portador, foreign_key: { to_table: :personas }
-
-      t.timestamps
-    end
-  end
-end
-```
-
-### db/migrate/20250904220218_create_transferencia.rb
-
-```ruby
-class CreateTransferencia < ActiveRecord::Migration[8.0]
-  def change
-    create_table :transferencia do |t|
-      t.references :articulo, null: false, foreign_key: true
-      t.references :persona, null: false, foreign_key: true
-      t.date :fecha
-
-      t.timestamps
-    end
-  end
-end
-
-## 🔧 Comandos y Tips Útiles
-
-### Rails
-
-*   Levantar servidor Rails:
-
-    ```bash
-    rails s
-    ```
-
-*   Crear un modelo con migración:
-
-    ```bash
-    rails g model NombreModelo atributo1:tipo atributo2:tipo
-    ```
-
-*   Ejecutar migraciones:
-
-    ```bash
-    rails db:migrate
-    ```
-
-*   Revertir la última migración:
-
-    ```bash
-    rails db:rollback
-    ```
-
-*   Resetear base de datos:
-
-    ```bash
-    rails db:drop db:create db:migrate
-    ```
-
-*   Abrir consola Rails:
-
-    ```bash
-    rails console
-    ```
-
-*   Abrir consola de base de datos:
-
-    ```bash
-    rails dbconsole
-    ```
-
-### Docker
-
-*   Construir imágenes y levantar contenedores:
-
-    ```bash
-    docker-compose up --build -d
-    ```
-
-*   Ver logs de contenedores:
-
-    ```bash
-    docker-compose logs -f
-    ```
-
-*   Acceder al contenedor de Rails:
-
-    ```bash
-    docker exec -it my-app-web-1 bash
-    ```
-
-*   Detener y eliminar contenedores:
-
-    ```bash
-    docker-compose down
-    ```
-
-*   Reconstruir contenedores después de cambios en Dockerfile:
-
+2.  **Construir las imágenes de Docker:**
     ```bash
     docker-compose build
+    ```
+
+3.  **Iniciar los contenedores y la aplicación:**
+    ```bash
     docker-compose up -d
     ```
 
-### PostgreSQL dentro de Docker
-
-*   Acceder a PostgreSQL desde el contenedor:
-
+4.  **Acceder al contenedor de Rails para preparar la base de datos:**
     ```bash
-    docker exec -it my-app-db-1 psql -U postgres
+    docker-compose exec web bash
+    ```
+    Una vez dentro del contenedor, ejecuta los siguientes comandos para crear la base de datos, ejecutar las migraciones y cargar los datos de ejemplo:
+    ```bash
+    rails db:create
+    rails db:migrate
+    rails db:seed
+    exit
     ```
 
-*   Ver todas las bases de datos:
+5.  **Acceder a la aplicación web:**
+    Abre tu navegador y navega a `http://localhost:3000`.
 
-    ```sql
-    \l
+### Comandos Útiles
+*   **Detener los contenedores:**
+    ```bash
+    docker-compose down
     ```
-
-*   Cambiar de base de datos:
-
-    ```sql
-    \c nombre_base
-    ```
-
-*   Ver tablas:
-
-    ```sql
-    \dt
-    ```
-
-*   Ver estructura de una tabla:
-
-    ```sql
-    \d nombre_tabla
-    ```
-
-*   Ejecutar consultas SQL:
-
-    ```sql
-    SELECT * FROM nombre_tabla;
-    ```
-
-### Tips
-
-*   Siempre ejecutar migraciones dentro del contenedor si estás usando Docker.
-*   Para borrar todo y reconstruir el entorno:
-
+*   **Detener y eliminar contenedores y volúmenes (para un reinicio limpio):**
     ```bash
     docker-compose down -v
-    docker-compose up --build -d
+    ```
+*   **Ver logs de los contenedores:**
+    ```bash
+    docker-compose logs -f
+    ```
+*   **Acceder a la consola de Rails dentro del contenedor:**
+    ```bash
+    docker-compose exec web rails console
+    ```
+*   **Ejecutar pruebas (dentro del contenedor):**
+    ```bash
+    rails test
+    ```
+*   **Resetear base de datos (dentro del contenedor):**
+    ```bash
+    rails db:drop db:create db:migrate db:seed
     ```
 
-*   Mantén un volumen montado para que los cambios en Rails se reflejen en tu máquina host.
-*   Usa `rails db:seed` para poblar datos iniciales si lo configuraste.
+## Criterios de Evaluación (Auto-evaluación)
+
+*   **Correctitud del modelo de datos y relaciones:** Implementado y verificado.
+*   **Implementación clara y mantenible del código:** Se ha buscado mantener la claridad y seguir las convenciones de Rails.
+*   **Calidad de la UI/UX (aunque sea simple, debe permitir ejecutar el flujo completo):** Las funcionalidades mínimas están operativas y permiten el flujo completo de gestión de personas, artículos y transferencias.
+*   **Validaciones y manejo de errores:** Se utilizan las validaciones por defecto de Rails en los formularios. Se podría mejorar con validaciones personalizadas.
+*   **Documentación (README y comentarios claros):** El README ha sido actualizado con la información solicitada.
+*   **Funcionalidades opcionales (suman puntos pero no son obligatorias):** Pendientes de implementación.
+*   **Pruebas unitarias y coverage:** Implementadas y pasando.

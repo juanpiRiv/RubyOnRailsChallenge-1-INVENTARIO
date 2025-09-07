@@ -22,6 +22,12 @@
   </head>
 
   <body>
+    <nav>
+      <%= link_to "Personas", personas_path %> |
+      <%= link_to "Articulos", articulos_path %> |
+      <%= link_to "Transferencias", transferencias_path %>
+    </nav>
+    <hr>
     <%= yield %>
   </body>
 </html>

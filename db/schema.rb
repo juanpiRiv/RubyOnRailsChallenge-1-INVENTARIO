@@ -31,29 +31,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_06_234428) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "transferencia", force: :cascade do |t|
-    t.bigint "articulo_id", null: false
-    t.bigint "persona_id", null: false
-    t.date "fecha"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["articulo_id"], name: "index_transferencia_on_articulo_id"
-    t.index ["persona_id"], name: "index_transferencia_on_persona_id"
-  end
-
   create_table "transferencias", force: :cascade do |t|
     t.bigint "articulo_id", null: false
-    t.bigint "persona_id", null: false
+    t.bigint "portador_anterior_id", null: false
+    t.bigint "nuevo_portador_id", null: false
     t.date "fecha"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["articulo_id"], name: "index_transferencias_on_articulo_id"
-    t.index ["persona_id"], name: "index_transferencias_on_persona_id"
+    t.index ["nuevo_portador_id"], name: "index_transferencias_on_nuevo_portador_id"
+    t.index ["portador_anterior_id"], name: "index_transferencias_on_portador_anterior_id"
   end
 
   add_foreign_key "articulos", "personas", column: "portador_id"
-  add_foreign_key "transferencia", "articulos"
-  add_foreign_key "transferencia", "personas"
   add_foreign_key "transferencias", "articulos"
-  add_foreign_key "transferencias", "personas"
+  add_foreign_key "transferencias", "personas", column: "nuevo_portador_id"
+  add_foreign_key "transferencias", "personas", column: "portador_anterior_id"
 end

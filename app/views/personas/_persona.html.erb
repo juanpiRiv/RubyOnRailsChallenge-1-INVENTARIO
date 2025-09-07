@@ -27,12 +27,19 @@
   <hr>
 
   <h3>Historial de Artículos Portados (Transferencias)</h3>
-  <% if persona.transferencias.any? %>
+  <% transferencias = Transferencia.where("portador_anterior_id = ? OR nuevo_portador_id = ?", persona.id, persona.id).order(fecha: :desc) %>
+  <% if transferencias.any? %>
     <ul>
-      <% persona.transferencias.order(fecha: :desc).each do |transferencia| %>
+      <% transferencias.each do |transferencia| %>
         <li>
           <strong><%= transferencia.fecha %>:</strong>
-          Recibió el artículo <%= link_to "#{transferencia.articulo.marca} #{transferencia.articulo.modelo}", articulo_path(transferencia.articulo) %>
+          <% if transferencia.nuevo_portador_id == persona.id %>
+            Recibió el artículo <%= link_to "#{transferencia.articulo.marca} #{transferencia.articulo.modelo}", articulo_path(transferencia.articulo) %>
+            de <%= link_to "#{transferencia.portador_anterior.nombre} #{transferencia.portador_anterior.apellido}", persona_path(transferencia.portador_anterior) %>.
+          <% else %>
+            Transfirió el artículo <%= link_to "#{transferencia.articulo.marca} #{transferencia.articulo.modelo}", articulo_path(transferencia.articulo) %>
+            a <%= link_to "#{transferencia.nuevo_portador.nombre} #{transferencia.nuevo_portador.apellido}", persona_path(transferencia.nuevo_portador) %>.
+          <% end %>
         </li>
       <% end %>
     </ul>

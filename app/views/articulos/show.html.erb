@@ -2,9 +2,26 @@
 
 <%= render @articulo %>
 
-<div>
-  <%= link_to "Edit this articulo", edit_articulo_path(@articulo) %> |
-  <%= link_to "Back to articulos", articulos_path %>
+<h2>Historial de Portadores</h2>
+<% if @articulo.transferencias.any? %>
+  <ul>
+    <% @articulo.transferencias.each do |transferencia| %>
+      <li>
+        <%= transferencia.portador_anterior.nombre %> <%= transferencia.portador_anterior.apellido %>
+        transfirió a
+        <%= transferencia.nuevo_portador.nombre %> <%= transferencia.nuevo_portador.apellido %>
+        el <%= transferencia.fecha.strftime("%d/%m/%Y") %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No hay historial de transferencias para este artículo.</p>
+<% end %>
 
-  <%= button_to "Destroy this articulo", @articulo, method: :delete %>
+<div>
+  <%= link_to "Registrar Transferencia", new_transferencia_path(articulo_id: @articulo.id) %> |
+  <%= link_to "Editar este artículo", edit_articulo_path(@articulo) %> |
+  <%= link_to "Volver a artículos", articulos_path %>
+
+  <%= button_to "Eliminar este artículo", @articulo, method: :delete %>
 </div>

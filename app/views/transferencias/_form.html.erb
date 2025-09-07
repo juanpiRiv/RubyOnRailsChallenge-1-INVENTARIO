@@ -16,8 +16,8 @@
   </div>
 
   <div>
-    <%= form.label :persona_id, "Persona", style: "display: block" %>
-    <%= form.collection_select :persona_id, Persona.all, :id, :nombre, prompt: "Seleccione una persona" %>
+    <%= form.label :nuevo_portador_id, "Nuevo Portador", style: "display: block" %>
+    <%= form.collection_select :nuevo_portador_id, Persona.all, :id, ->(p){ "#{p.nombre} #{p.apellido}" }, prompt: "Seleccione una persona" %>
   </div>
 
   <div>

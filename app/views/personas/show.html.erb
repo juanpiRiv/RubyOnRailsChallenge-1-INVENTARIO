@@ -2,9 +2,36 @@
 
 <%= render @persona %>
 
-<div>
-  <%= link_to "Edit this persona", edit_persona_path(@persona) %> |
-  <%= link_to "Back to personas", personas_path %>
+<h2>Artículos que porta actualmente</h2>
+<% if @persona.articulos.any? %>
+  <ul>
+    <% @persona.articulos.each do |articulo| %>
+      <li><%= link_to "#{articulo.marca} #{articulo.modelo}", articulo %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Esta persona no porta ningún artículo actualmente.</p>
+<% end %>
 
-  <%= button_to "Destroy this persona", @persona, method: :delete %>
+<h2>Historial de Artículos Portados</h2>
+<% if @persona.todas_las_transferencias.any? %>
+  <ul>
+    <% @persona.todas_las_transferencias.each do |transferencia| %>
+      <li>
+        El artículo <%= link_to "#{transferencia.articulo.marca} #{transferencia.articulo.modelo}", transferencia.articulo %>
+        fue transferido de <%= transferencia.portador_anterior.nombre %> <%= transferencia.portador_anterior.apellido %>
+        a <%= transferencia.nuevo_portador.nombre %> <%= transferencia.nuevo_portador.apellido %>
+        el <%= transferencia.fecha.strftime("%d/%m/%Y") %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No hay historial de transferencias para esta persona.</p>
+<% end %>
+
+<div>
+  <%= link_to "Editar esta persona", edit_persona_path(@persona) %> |
+  <%= link_to "Volver a personas", personas_path %>
+
+  <%= button_to "Eliminar esta persona", @persona, method: :delete %>
 </div>

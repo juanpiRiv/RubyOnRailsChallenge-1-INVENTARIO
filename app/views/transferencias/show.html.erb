@@ -2,7 +2,8 @@
 
 <p>
   Artículo: <%= @transferencia.articulo.marca %> <%= @transferencia.articulo.modelo %><br>
-  Persona: <%= @transferencia.persona.nombre %><br>
+  Portador Anterior: <%= @transferencia.portador_anterior.nombre %> <%= @transferencia.portador_anterior.apellido %><br>
+  Nuevo Portador: <%= @transferencia.nuevo_portador.nombre %> <%= @transferencia.nuevo_portador.apellido %><br>
   Fecha: <%= @transferencia.fecha %>
 </p>
 

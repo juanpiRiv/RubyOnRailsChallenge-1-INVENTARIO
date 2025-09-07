@@ -22,9 +22,13 @@ puts "#{Articulo.count} artículos creados."
 
 # Crear Transferencias
 puts "Creando transferencias..."
-Transferencia.create!(articulo: articulo1, persona: persona1, fecha: Date.today - 10.days)
-Transferencia.create!(articulo: articulo2, persona: persona2, fecha: Date.today - 5.days)
-Transferencia.create!(articulo: articulo1, persona: persona2, fecha: Date.today) # Reasignación
+# Transferencia 1: articulo1 de persona1 a persona2
+Transferencia.create!(articulo: articulo1, portador_anterior: persona1, nuevo_portador: persona2, fecha: Date.today - 10.days)
+articulo1.update!(portador: persona2)
+
+# Transferencia 2: articulo2 de persona1 a persona3
+Transferencia.create!(articulo: articulo2, portador_anterior: persona1, nuevo_portador: persona3, fecha: Date.today - 5.days)
+articulo2.update!(portador: persona3)
 puts "#{Transferencia.count} transferencias creadas."
 
 puts "¡Seed completado!"

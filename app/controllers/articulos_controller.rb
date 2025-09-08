@@ -1,4 +1,5 @@
 class ArticulosController < ApplicationController
+  allow_unauthenticated_access only: :index
   before_action :set_articulo, only: %i[ show edit update destroy ]
 
   # GET /articulos or /articulos.json

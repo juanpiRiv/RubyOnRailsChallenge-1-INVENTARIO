@@ -23,5 +23,8 @@ module MyApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Add app/javascript to the asset load path
+    config.assets.paths << Rails.root.join("app", "javascript")
   end
 end

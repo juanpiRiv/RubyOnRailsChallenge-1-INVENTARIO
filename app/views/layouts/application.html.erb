@@ -19,6 +19,7 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
@@ -26,6 +27,12 @@
       <%= link_to "Personas", personas_path %> |
       <%= link_to "Articulos", articulos_path %> |
       <%= link_to "Transferencias", transferencias_path %>
+      <% if authenticated? %>
+        | <%= button_to "Logout", logout_path, method: :delete, data: { turbo: false } %>
+      <% else %>
+        | <%= link_to "Login", login_path %> |
+        <%= link_to "Register", register_path %>
+      <% end %>
     </nav>
     <hr>
     <%= yield %>

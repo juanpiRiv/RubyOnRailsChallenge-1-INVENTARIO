@@ -1,4 +1,5 @@
 class TransferenciasController < ApplicationController
+  allow_unauthenticated_access only: :index
   before_action :set_transferencia, only: %i[show edit update destroy]
 
   # GET /transferencias

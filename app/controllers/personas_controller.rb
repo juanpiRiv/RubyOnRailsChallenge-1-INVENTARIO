@@ -1,4 +1,5 @@
 class PersonasController < ApplicationController
+  allow_unauthenticated_access only: :index
   before_action :set_persona, only: %i[ show edit update destroy ]
 
   # GET /personas or /personas.json

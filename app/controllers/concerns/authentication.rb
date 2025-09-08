@@ -2,7 +2,7 @@ module Authentication
   extend ActiveSupport::Concern
 
   included do
-    before_action :require_authentication
+    before_action :require_authentication, if: :html_request?
     helper_method :authenticated?
   end
 
@@ -48,5 +48,9 @@ module Authentication
     def terminate_session
       Current.session.destroy
       cookies.delete(:session_id)
+    end
+
+    def html_request?
+      request.format.html?
     end
 end

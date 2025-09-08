@@ -53,6 +53,10 @@ Construir una aplicación web que permita gestionar artículos y personas en un 
 *   API JSON para artículos (productos), personas y transferencias.
 *   Pruebas automatizadas (RSpec o Minitest) mínimas.
 
+## API
+
+Para facilitar las pruebas de la API, se incluye una colección de Postman (`postman_collection.json`) en la raíz del proyecto. Puedes importarla en Postman para tener acceso a todos los endpoints de la API, incluyendo ejemplos de peticiones para `login`, `registro`, `articulos`, `personas` y `transferencias`.
+
 ## Diseño de la Solución
 
 ### Decisiones de Diseño

@@ -11,4 +11,16 @@ Rails.application.routes.draw do
   post 'register', to: 'users#create'
 
   root "personas#index"
+
+  namespace :api do
+    namespace :v1 do
+      resources :articulos, except: [:new, :edit]
+      resources :personas, except: [:new, :edit]
+      resources :transferencias, except: [:new, :edit]
+
+      post 'login', to: 'sessions#create'
+      delete 'logout', to: 'sessions#destroy'
+      post 'register', to: 'users#create'
+    end
+  end
 end

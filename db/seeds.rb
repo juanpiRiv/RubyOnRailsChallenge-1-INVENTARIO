@@ -31,4 +31,18 @@ Transferencia.create!(articulo: articulo2, portador_anterior: persona1, nuevo_po
 articulo2.update!(portador: persona3)
 puts "#{Transferencia.count} transferencias creadas."
 
+# Crear Usuario Administrador
+puts "Creando usuario administrador..."
+admin_user = User.find_or_initialize_by(email_address: "admin@example.com")
+if admin_user.new_record?
+  admin_user.password = "password"
+  admin_user.password_confirmation = "password"
+  admin_user.save!
+elsif admin_user.authentication_token.blank?
+  admin_user.generate_authentication_token
+  admin_user.save!
+end
+puts "Usuario administrador creado/encontrado: #{admin_user.email_address}"
+puts "Token de autenticación para admin@example.com: #{admin_user.authentication_token}"
+
 puts "¡Seed completado!"

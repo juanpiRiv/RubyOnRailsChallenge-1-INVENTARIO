@@ -4,6 +4,16 @@ class ArticulosController < ApplicationController
   # GET /articulos or /articulos.json
   def index
     @articulos = Articulo.all
+    @articulos = @articulos.filter_by_marca(params[:marca]) if params[:marca].present?
+    @articulos = @articulos.filter_by_modelo(params[:modelo]) if params[:modelo].present?
+    @articulos = @articulos.filter_by_fecha_desde(params[:fecha_desde]) if params[:fecha_desde].present?
+    @articulos = @articulos.filter_by_fecha_hasta(params[:fecha_hasta]) if params[:fecha_hasta].present?
+
+    respond_to do |format|
+      format.html
+      format.json
+      format.csv { send_data Articulo.to_csv(@articulos), filename: "articulos-#{Date.today}.csv" }
+    end
   end
 
   # GET /articulos/1 or /articulos/1.json

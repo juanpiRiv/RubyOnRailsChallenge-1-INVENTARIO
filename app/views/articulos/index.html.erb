@@ -4,6 +4,26 @@
 
 <h1>Articulos</h1>
 
+<%= form_with url: articulos_path, method: :get, local: true do |f| %>
+  <div>
+    <%= f.label :marca %>
+    <%= f.text_field :marca, value: params[:marca] %>
+
+    <%= f.label :modelo %>
+    <%= f.text_field :modelo, value: params[:modelo] %>
+
+    <%= f.label :fecha_desde, "Fecha desde" %>
+    <%= f.date_field :fecha_desde, value: params[:fecha_desde] %>
+
+    <%= f.label :fecha_hasta, "Fecha hasta" %>
+    <%= f.date_field :fecha_hasta, value: params[:fecha_hasta] %>
+
+    <%= f.submit "Filtrar" %>
+  </div>
+<% end %>
+
+<%= link_to "Exportar a CSV", articulos_path(request.query_parameters.merge(format: :csv)) %>
+
 <div id="articulos">
   <% @articulos.each do |articulo| %>
     <%= render articulo %>

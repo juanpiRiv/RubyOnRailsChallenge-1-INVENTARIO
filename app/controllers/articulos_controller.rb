@@ -60,11 +60,11 @@ class ArticulosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_articulo
-      @articulo = Articulo.find(params.expect(:id))
+      @articulo = Articulo.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def articulo_params
-      params.expect(articulo: [ :modelo, :marca, :fecha_ingreso, :portador_id ])
+      params.require(:articulo).permit(:modelo, :marca, :fecha_ingreso, :portador_id)
     end
 end

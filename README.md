@@ -198,12 +198,3 @@ El modelo de datos se compone de tres entidades principales: `Persona`, `Articul
     rails db:drop db:create db:migrate db:seed
     ```
 
-## Criterios de Evaluación (Auto-evaluación)
-
-*   **Correctitud del modelo de datos y relaciones:** Implementado y verificado.
-*   **Implementación clara y mantenible del código:** Se ha buscado mantener la claridad y seguir las convenciones de Rails.
-*   **Calidad de la UI/UX (aunque sea simple, debe permitir ejecutar el flujo completo):** Las funcionalidades mínimas están operativas y permiten el flujo completo de gestión de personas, artículos y transferencias.
-*   **Validaciones y manejo de errores:** Se utilizan las validaciones por defecto de Rails en los formularios. Se podría mejorar con validaciones personalizadas.
-*   **Documentación (README y comentarios claros):** El README ha sido actualizado con la información solicitada.
-*   **Funcionalidades opcionales (suman puntos pero no son obligatorias):** Pendientes de implementación.
-*   **Pruebas unitarias y coverage:** Implementadas y pasando.

@@ -39,10 +39,8 @@ Rails.application.configure do
   # -----------------------
   # Host Authorization para Railway
   # -----------------------
-  # Limpiar lista de hosts permitidos (opcional, flexible)
+  # Limpiar lista de hosts y permitir cualquier subdominio de railway
   config.hosts.clear
-
-  # Permitir cualquier subdominio que termine en .up.railway.app
-  config.hosts << /.*\.up\.railway\.app/
+  config.hosts << /[a-z0-9\-]+\.up\.railway\.app/
 
 end

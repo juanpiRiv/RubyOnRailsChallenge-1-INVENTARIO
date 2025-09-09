@@ -1,7 +1,6 @@
 # Inventario Ruby on Rails
 
 Este proyecto implementa un sistema de control de inventario utilizando Ruby on Rails 8 y PostgreSQL, con Hotwire para la interacción UI.
-<img width="1020" height="602" alt="image" src="https://github.com/user-attachments/assets/313dd2d7-b7e2-4ad3-a6d8-5b9c2c9f11f4" />
 
 ## Objetivo
 
@@ -26,33 +25,6 @@ Construir una aplicación web que permita gestionar artículos y personas en un 
 *   Un artículo puede ser transferido de una persona a otra.
 *   Se debe mantener un **historial de portadores por artículo**.
 *   Se debe mantener un **historial de artículos portados por persona**.
-
-## Funcionalidades Mínimas Implementadas
-
-*   **Listar artículos:** Muestra todos los artículos con sus datos básicos.
-*   **Detalle de artículo:**
-    *   Datos básicos del artículo.
-    *   Portador actual.
-    *   Historial de portadores (transferencias).
-*   **Listar personas:** Muestra todas las personas con sus datos básicos.
-*   **Detalle de persona:**
-    *   Datos básicos de la persona.
-    *   Artículos que porta actualmente.
-    *   Historial de artículos portados (transferencias).
-*   **Agregar artículo:** Formulario para crear nuevos artículos.
-*   **Agregar persona:** Formulario para crear nuevas personas.
-*   **Registrar transferencia de artículo:** Formulario para transferir un artículo de una persona a otra, actualizando el portador del artículo y registrando la transferencia en el historial.
-*   **Seeds obligatorias:** Se han cargado 3 personas, 5 artículos y 2 transferencias de ejemplo.
-
-## Funcionalidades Opcionales (Pendientes)
-
-*   ABM de marcas y modelos.
-*   Filtros de artículos por marca, modelo y fecha de ingreso.
-*   Exportar marcas, modelos, artículos, personas y transferencias a CSV.
-*   Importar marcas, modelos, artículos, personas y transferencias desde CSV.
-*   Login básico utilizando `rails generate authentication`.
-*   API JSON para artículos (productos), personas y transferencias.
-*   Pruebas automatizadas (RSpec o Minitest) mínimas.
 
 ## API
 
@@ -116,7 +88,7 @@ Para facilitar las pruebas de la API, se incluye una colección de Postman (`pos
     *   Enlace para "Volver al listado".
 
 ### Diagrama del Modelo de Datos (Entidades y Relaciones)
-
+<img width="1020" height="602" alt="image" src="https://github.com/user-attachments/assets/313dd2d7-b7e2-4ad3-a6d8-5b9c2c9f11f4" />
 El modelo de datos se compone de tres entidades principales: `Persona`, `Articulo` y `Transferencia`.
 
 *   **Persona:**

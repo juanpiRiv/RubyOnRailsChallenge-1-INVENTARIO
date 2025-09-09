@@ -132,23 +132,6 @@ El modelo de datos se compone de tres entidades principales: `Persona`, `Articul
         *   `belongs_to :portador_anterior, class_name: "Persona"` (El portador anterior de la transferencia)
         *   `belongs_to :nuevo_portador, class_name: "Persona"` (El nuevo portador de la transferencia)
 
-## Planificación del Proyecto
-
-Aquí está la lista de tareas que se ha seguido y las pendientes:
-
-- [x] Analizar los requisitos del ejercicio y crear una lista de tareas detallada.
-- [x] Revisar la estructura del proyecto y los archivos existentes.
-- [x] Identificar las funcionalidades mínimas y opcionales faltantes.
-- [x] Implementar el modelo de datos y las relaciones.
-- [x] Implementar las funcionalidades de Artículos (Listar, Detalle, Agregar).
-- [x] Implementar las funcionalidades de Personas (Listar, Detalle, Agregar).
-- [x] Implementar las funcionalidades de Transferencias (Registrar, Historial).
-- [x] Cargar las seeds obligatorias (3 personas, 5 artículos, 2 transferencias).
-- [ ] Implementar funcionalidades opcionales (ABM de marcas y modelos, filtros, exportar/importar CSV, login, API JSON).
-- [x] Crear mockups UI/UX y diagrama del modelo de datos.
-- [x] Actualizar el README con instrucciones, decisiones de diseño, mockups, modelo de datos y planificación.
-- [x] Implementar pruebas automatizadas.
-- [x] Verificar el cumplimiento de los criterios de evaluación.
 
 ## Instrucciones de Instalación y Ejecución
 

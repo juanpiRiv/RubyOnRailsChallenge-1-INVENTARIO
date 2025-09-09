@@ -103,18 +103,6 @@ Rails.application.configure do
 
   #  Permitir dominio Railway
   config.hosts << /.*\.up\.railway\.app/
-<<<<<<< HEAD
->>>>>>> parent of 168cf4d (Allow Railway host)
-
-  # Enable DNS rebinding protection and other `Host` header attacks.
-  # config.hosts = [
-  #   "example.com",     # Allow requests from example.com
-  #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
-  # ]
-  #
-  # Skip DNS rebinding protection for the default health check endpoint.
-  # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
-=======
   # Si Railway cambia de subdominio seguido, podés usar un regex:
   # config.hosts << /.*\.up\.railway\.app/
 >>>>>>> parent of c549549 (Allow Railway host)

@@ -1,6 +1,7 @@
 # Inventario Ruby on Rails
 
 Este proyecto implementa un sistema de control de inventario utilizando Ruby on Rails 8 y PostgreSQL, con Hotwire para la interacción UI.
+<img width="1020" height="602" alt="image" src="https://github.com/user-attachments/assets/313dd2d7-b7e2-4ad3-a6d8-5b9c2c9f11f4" />
 
 ## Objetivo
 

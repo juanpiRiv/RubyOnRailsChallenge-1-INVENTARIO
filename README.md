@@ -38,6 +38,13 @@ Para facilitar las pruebas de la API, se incluye una colección de Postman (`pos
 *   **Capa de Interacción UI:** Hotwire (Turbo Frames y Stimulus) para una experiencia de usuario dinámica sin escribir JavaScript complejo. Esto se alinea con la filosofía de Rails de "HTML over the wire".
 
 ### Mockups UI/UX (Descripción Textual)
+* Ejemplos A FUTURO
+<img width="1356" height="796" alt="image" src="https://github.com/user-attachments/assets/78a0131f-9408-475f-b63c-b724b637dd1e" />
+<img width="1347" height="735" alt="image" src="https://github.com/user-attachments/assets/a35d7750-8b38-4f5d-97bf-1d337f4a94ae" />
+<img width="1354" height="743" alt="image" src="https://github.com/user-attachments/assets/b7606bcc-347a-4f7e-83e9-790c585ed0ab" />
+<img width="1362" height="665" alt="image" src="https://github.com/user-attachments/assets/bdf9ecf9-15b8-486d-a491-a3838e070cc1" />
+
+
 
 #### 1. Página Principal (Personas#index)
 *   **Encabezado:** Enlaces de navegación a "Personas", "Artículos", "Transferencias".

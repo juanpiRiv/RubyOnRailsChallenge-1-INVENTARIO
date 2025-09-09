@@ -70,8 +70,7 @@ Rails.application.configure do
   config.active_record.attributes_for_inspect = [ :id ]
 
   #  Permitir dominio Railway
-  config.hosts << "rubyonrailschallenge-1-inventario-production.up.railway.app"
-
+  config.hosts << /.*\.up\.railway\.app/
   # Si Railway cambia de subdominio seguido, podés usar un regex:
   # config.hosts << /.*\.up\.railway\.app/
 end

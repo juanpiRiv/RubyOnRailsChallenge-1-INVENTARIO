@@ -2,7 +2,11 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+<<<<<<< HEAD
 
+=======
+    config.hosts.clear
+>>>>>>> parent of c549549 (Allow Railway host)
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
@@ -59,6 +63,7 @@ Rails.application.configure do
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: "example.com" }
 
+<<<<<<< HEAD
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   # config.action_mailer.smtp_settings = {
   #   user_name: Rails.application.credentials.dig(:smtp, :user_name),
@@ -68,6 +73,8 @@ Rails.application.configure do
   #   authentication: :plain
   # }
 
+=======
+>>>>>>> parent of c549549 (Allow Railway host)
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
@@ -75,6 +82,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   # Only use :id for inspections in production.
   config.active_record.attributes_for_inspect = [ :id ]
@@ -84,9 +92,14 @@ Rails.application.configure do
   # -----------------------
   # Limpiar lista de hosts permitidos (opcional, flexible)
   config.hosts.clear
+=======
+  # Only use :id for inspections in production.
+  config.active_record.attributes_for_inspect = [ :id ]
+>>>>>>> parent of c549549 (Allow Railway host)
 
-  # Permitir cualquier subdominio que termine en .up.railway.app
+  #  Permitir dominio Railway
   config.hosts << /.*\.up\.railway\.app/
+<<<<<<< HEAD
 >>>>>>> parent of 168cf4d (Allow Railway host)
 
   # Enable DNS rebinding protection and other `Host` header attacks.
@@ -97,4 +110,8 @@ Rails.application.configure do
   #
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+=======
+  # Si Railway cambia de subdominio seguido, podés usar un regex:
+  # config.hosts << /.*\.up\.railway\.app/
+>>>>>>> parent of c549549 (Allow Railway host)
 end

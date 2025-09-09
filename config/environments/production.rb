@@ -3,10 +3,14 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
     config.hosts.clear
 >>>>>>> parent of c549549 (Allow Railway host)
+=======
+
+>>>>>>> parent of 0fdfb67 (Allow Railway host)
   # Code is not reloaded between requests.
   config.enable_reloading = false
 

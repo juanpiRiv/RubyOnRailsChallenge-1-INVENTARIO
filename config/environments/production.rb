@@ -75,8 +75,19 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+<<<<<<< HEAD
   # Only use :id for inspections in production.
   config.active_record.attributes_for_inspect = [ :id ]
+=======
+  # -----------------------
+  # Host Authorization para Railway
+  # -----------------------
+  # Limpiar lista de hosts permitidos (opcional, flexible)
+  config.hosts.clear
+
+  # Permitir cualquier subdominio que termine en .up.railway.app
+  config.hosts << /.*\.up\.railway\.app/
+>>>>>>> parent of 168cf4d (Allow Railway host)
 
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [

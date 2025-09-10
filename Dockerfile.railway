@@ -1,0 +1,34 @@
+# Imagen base oficial de Ruby
+FROM ruby:3.2.3
+
+# Paquetes necesarios para Rails + Postgres
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    postgresql-client tzdata curl build-essential \
+ && rm -rf /var/lib/apt/lists/*
+
+# Variables de entorno
+ENV RAILS_ENV=production \
+    RACK_ENV=production \
+    BUNDLE_WITHOUT="development test" \
+    RAILS_SERVE_STATIC_FILES=1 \
+    RAILS_LOG_TO_STDOUT=1
+
+# Directorio de trabajo
+WORKDIR /app
+
+# Copiamos Gemfile primero para aprovechar cache de Docker
+COPY Gemfile Gemfile.lock ./
+RUN bundle install --jobs 4 --retry 3
+
+# Copiamos el resto del proyecto
+COPY . .
+
+# Copiamos el entrypoint
+COPY bin/docker-entrypoint /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
+
+# Exponemos el puerto (Railway asigna PORT)
+EXPOSE 3000
+
+# Entrypoint
+ENTRYPOINT ["docker-entrypoint"]

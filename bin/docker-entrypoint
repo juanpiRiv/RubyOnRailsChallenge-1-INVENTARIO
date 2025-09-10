@@ -6,9 +6,15 @@ if [ -z "${LD_PRELOAD+x}" ]; then
     export LD_PRELOAD
 fi
 
-# If running the rails server then create or migrate existing database
+# Si el comando es "rails server", entonces preparar DB y assets
 if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
-  ./bin/rails db:prepare
+    echo "==> Preparando base de datos..."
+    bundle exec rails db:prepare
+
+    echo "==> Precompilando assets..."
+    bundle exec rails assets:precompile
 fi
 
-exec "${@}"
+# Ejecutar el comando original
+exec "$@"
+

@@ -32,3 +32,6 @@ EXPOSE 3000
 
 # Entrypoint
 ENTRYPOINT ["docker-entrypoint"]
+
+# Comando por defecto para iniciar Rails
+CMD ["./bin/rails", "server", "-b", "0.0.0.0", "-p", "$PORT"]
